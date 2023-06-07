@@ -1,0 +1,38 @@
+import java.util.* ;
+import java.io.*; 
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution 
+{
+	public static ArrayList<Integer> nextPermutation(ArrayList<Integer> permutation) 
+	{
+		// Write your code here.
+		int n = permutation.size();
+		int idx1 = -1;
+		for(int i =0;i<n-1;i++){
+			if(permutation.get(i)<permutation.get(i+1)){
+				idx1 = i;
+			}
+		}
+		if(idx1 == -1){
+			Collections.reverse(permutation);
+			return permutation;
+		}
+		int idx2 = -1;
+		int min = Integer.MAX_VALUE;
+		for(int i =idx1+1;i<n;i++){
+			if(permutation.get(idx1)<permutation.get(i)){
+				if(permutation.get(i)<min){
+					idx2 = i;
+					min = permutation.get(i);
+				}
+			}
+		}
+		int r = permutation.get(idx2);
+		permutation.set(idx2,permutation.get(idx1));
+		permutation.set(idx1,r);
+		Collections.reverse(permutation.subList(idx1+1, n));
+		return permutation;
+	}
+}
