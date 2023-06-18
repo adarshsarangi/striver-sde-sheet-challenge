@@ -1,0 +1,85 @@
+import java.io.*;
+import java.util.* ;
+
+/************************************************************
+
+    Following is the linked list node structure:
+    
+    class LinkedListNode<T> {
+        T data;
+        LinkedListNode<T> next;
+
+        public LinkedListNode(T data) {
+            this.data = data;
+        }
+    }
+
+************************************************************/
+
+public class Solution {
+	public static LinkedListNode<Integer> sortTwoLists(LinkedListNode<Integer> first, LinkedListNode<Integer> second) {
+		// Write your code here.
+        LinkedListNode<Integer> head = null;
+        LinkedListNode<Integer> ptr = null;
+        if(first == null){
+            return second;
+        }
+        if(second == null){
+            return first;
+        }
+        while(first != null && second != null){
+            if(first.data < second.data){
+                if(head == null){
+                    head = first;
+                    ptr = first;
+                    first = first.next;
+                    ptr.next = null;
+                }else{
+                    ptr.next = first;
+                    first = first.next;
+                    ptr = ptr.next;
+                    ptr.next = null;
+                }
+            }else{
+                if(head == null){
+                    head = second;
+                    ptr = second;
+                    second = second.next;
+                    ptr.next = null;
+                }else{
+                    ptr.next = second;
+                    second= second.next;
+                    ptr = ptr.next;
+                    ptr.next = null;
+                }
+            }
+        }
+        while(first != null){
+            if(head == null){
+                    head = first;
+                    ptr = first;
+                    first = first.next;
+                    ptr.next = null;
+            }else{
+                ptr.next = first;
+                first = first.next;
+                ptr = ptr.next;
+                ptr.next = null;
+            }
+        }
+        while(second != null){
+            if(head == null){
+                head = second;
+                ptr = second;
+                second = second.next;
+                ptr.next = null;
+            }else{
+                ptr.next = second;
+                second= second.next;
+                ptr = ptr.next;
+                ptr.next = null;
+            }
+        }
+        return head;
+	}
+}
