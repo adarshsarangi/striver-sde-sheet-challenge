@@ -1,0 +1,27 @@
+import java.io.*;
+import java.util.* ;
+
+import java.util.ArrayList;
+
+public class Solution {
+
+	public static int LongestSubsetWithZeroSum(ArrayList<Integer> arr) {
+
+		// Write your code here.
+		HashMap<Integer,Integer> hm = new HashMap<>();
+		int sum = 0;
+		int mL = 0;
+		for(int i =0;i<arr.size();i++){
+			sum += arr.get(i);
+			if(sum == 0){
+				mL = i+1;
+			}
+			if(hm.containsKey(sum)){
+				mL = Math.max(mL, i-hm.get(sum));
+			}else{
+				hm.put(sum,i);
+			}
+		}
+		return mL;
+	}
+}
